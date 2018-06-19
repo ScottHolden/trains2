@@ -12,17 +12,22 @@ module trains.play {
     export class Train {
         public defaultSpeed = 2;
 
-        public coords: trains.play.TrainCoords;
+        public coords: trains.play.TrainCoords = {
+            currentX: 0,
+            currentY: 0,
+            previousX: 0,
+            previousY: 0,
+        };
 
-        private lastCell: Cell;
-        private directionToUse: Direction;
-        private isPaused: boolean;
+        private lastCell: Cell | undefined;
+        private directionToUse: Direction = trains.play.Direction.Horizontal;
+        private isPaused: boolean = false;
 
-        public trainColourIndex: number;
+        public trainColourIndex: number = 0;
 
-        public name: string;
+        public name: string = "unknown train";
 
-        private trainSpeed: number;
+        private trainSpeed: number = 2;
         public imageReverse: number = 1;
 
         public carriage: trains.play.TrainCarriage | undefined;
@@ -224,7 +229,7 @@ module trains.play {
         }
 
         getNewCoordsForTrain(cell: Cell, coords: trains.play.TrainCoords, speed: number): TrainCoordsResult {
-            if (this.lastCell !== cell) {
+            if (this.lastCell !== undefined && this.lastCell !== cell) {
                 this.directionToUse = cell.getDirectionToUse(this.lastCell);
                 this.lastCell = cell;
             }
@@ -398,7 +403,7 @@ module trains.play {
             context.restore();
         }
 
-        private collidesWith(coords: TrainCoords): boolean {
+        private collidesWith(_: TrainCoords): boolean {
             var frontCoords = this.getFrontOfTrain(10);
             var myColumn = GameBoard.getGridCoord(frontCoords.currentX);
             var myRow = GameBoard.getGridCoord(frontCoords.currentY);
@@ -458,7 +463,7 @@ module trains.play {
             }
         }
 
-        public drawLighting(context: CanvasRenderingContext2D): void {
+        public drawLighting(_: CanvasRenderingContext2D): void {
             //Do nothing
         }
     }

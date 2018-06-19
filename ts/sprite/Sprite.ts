@@ -3,10 +3,14 @@ module trains.play {
         private readonly canvas: HTMLCanvasElement;
         public readonly context: CanvasRenderingContext2D;
         private restored: boolean = false;
+        private width: number;
+        private height: number;
         constructor(width: number, height: number) {
             this.canvas = document.createElement("canvas");
-            this.canvas.width = width;
-            this.canvas.height = height;
+            this.width = width;
+            this.height = height;
+            this.canvas.width = width + 1;
+            this.canvas.height = height + 1;
 
             var context = this.canvas.getContext("2d");
 
@@ -26,7 +30,7 @@ module trains.play {
                 this.context.restore();
                 this.restored = true;
             }
-            context.drawImage(this.canvas, x - 0.5, y - 0.5);
+            context.drawImage(this.canvas, 0, 0, this.width, this.height, x - 0.5, y - 0.5, this.width, this.height);
         }
     }
 }

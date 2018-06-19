@@ -47,7 +47,7 @@ module trains.play {
         private maxRows: number;
 
         private cells: trains.play.BoardCells = {};
-        private tool: Tool;
+        private tool: Tool = trains.play.Tool.Track;
         
         private trainIDCounter = 0;
         public trains = new Array<trains.play.Train>();
@@ -110,7 +110,7 @@ module trains.play {
             [this.trackCanvas, this.trainCanvas].forEach(el => {            
                 el.addEventListener('click', (event: MouseEvent) => this.cellClick(event));
                 el.addEventListener('mousemove', (event: MouseEvent) => this.cellMoveOver(event));
-                el.addEventListener('touchstart', (event: any) => false);
+                el.addEventListener('touchstart', (_: any) => false);
                 el.addEventListener('touchmove', (event: any) => {
                     this.cellTouch(event);
                     event.preventDefault();
