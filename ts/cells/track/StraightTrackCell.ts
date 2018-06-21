@@ -1,35 +1,42 @@
-import Sprite from "../../sprite/Sprite";
+import TrackSpriteCollection from "../../sprite/TrackSpriteCollection";
+import { StraightTrackDirection } from "./directions/StraightTrackDirectionEnum";
 import { ITrackCell } from "./ITrackCell";
 
 export default class StraightTrackCell implements ITrackCell {
-    private horz: boolean = true;
+    private get Horizontal(): boolean {
+        return this.direction === StraightTrackDirection.Horizontal;
+    }
+    private get Vertical(): boolean {
+        return this.direction === StraightTrackDirection.Vertical;
+    }
 
     public get ConnectedUp(): boolean {
-        return !this.horz;
+        return this.Vertical;
     }
     public get ConnectedDown(): boolean {
-        return !this.horz;
+        return this.Vertical;
     }
     public get ConnectedLeft(): boolean {
-        return this.horz;
+        return this.Horizontal;
     }
     public get ConnectedRight(): boolean {
-        return this.horz;
+        return this.Horizontal;
     }
 
-    constructor(private sprite: Sprite, private cellSize: number) {
+    constructor(private direction: StraightTrackDirection, private spriteCollection: TrackSpriteCollection,
+                private cellSize: number) {
 
     }
 
     public Draw(context: CanvasRenderingContext2D): void {
-        if (!this.horz) {
+        if (this.Vertical) {
             context.translate(this.cellSize, 0);
             context.rotate(Math.PI / 2);
         }
 
-        this.sprite.Draw(context, 0, 0);
+        this.spriteCollection.StraightTrackSprite.Draw(context, 0, 0);
 
-        if (!this.horz) {
+        if (this.Vertical) {
             context.rotate(- Math.PI / 2);
             context.translate(-this.cellSize, 0);
         }

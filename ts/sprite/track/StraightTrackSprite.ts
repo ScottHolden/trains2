@@ -3,7 +3,20 @@ import BaseTrackSprite from "BaseTrackSprite";
 export default class StraightTrackSprite extends BaseTrackSprite {
     constructor(cellSize: number, trackWidth: number, terminator: boolean = false) {
         super(cellSize);
+        this.DrawStraightTrack(cellSize, trackWidth, terminator);
+    }
 
+    protected DrawRotatedStraightTrack(cellSize: number, trackWidth: number) {
+        this.context.translate(cellSize, 0);
+        this.context.rotate(Math.PI / 2);
+
+        this.DrawStraightTrack(cellSize, trackWidth, false);
+
+        this.context.rotate(- Math.PI / 2);
+        this.context.translate(-cellSize, 0);
+    }
+
+    protected DrawStraightTrack(cellSize: number, trackWidth: number, terminator: boolean = false) {
         const firstTrackPosY = this.trackPadding;
         const secondTrackPosY = cellSize - this.trackPadding;
         const numPlanks = 3;

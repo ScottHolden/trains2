@@ -1,5 +1,5 @@
 export default class Sprite {
-    public readonly context: CanvasRenderingContext2D;
+    protected readonly context: CanvasRenderingContext2D;
     private readonly canvas: HTMLCanvasElement;
     private restored: boolean = false;
     constructor(private width: number, private height: number) {
