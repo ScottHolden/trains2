@@ -10,16 +10,23 @@ export default class StraightTrackCell extends TrackCellBase {
     }
 
     public Draw(context: CanvasRenderingContext2D): void {
-        if (this.direction === StraightTrackDirection.UpDown) {
-            context.translate(this.cellSize, 0);
-            context.rotate(Math.PI / 2);
+        if (this.direction === StraightTrackDirection.UpDown ||
+            this.direction === StraightTrackDirection.UpDownLeftRight) {
+            this.DrawVerticalTrack(context);
         }
-
+        if (this.direction === StraightTrackDirection.LeftRight ||
+            this.direction === StraightTrackDirection.UpDownLeftRight) {
+            this.DrawHorizontalTrack(context);
+        }
+    }
+    private DrawVerticalTrack(context: CanvasRenderingContext2D) {
+        context.translate(this.cellSize, 0);
+        context.rotate(Math.PI / 2);
+        this.DrawHorizontalTrack(context);
+        context.rotate(-Math.PI / 2);
+        context.translate(-this.cellSize, 0);
+    }
+    private DrawHorizontalTrack(context: CanvasRenderingContext2D) {
         this.spriteCollection.StraightTrackSprite.Draw(context, 0, 0);
-
-        if (this.direction === StraightTrackDirection.UpDown) {
-            context.rotate(-Math.PI / 2);
-            context.translate(-this.cellSize, 0);
-        }
     }
 }

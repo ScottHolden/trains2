@@ -1,8 +1,8 @@
 import TrackSpriteCollection from "../../sprite/TrackSpriteCollection";
 import { CurvedTrackDirection } from "./directions/CurvedTrackDirectionEnum";
 import { SwitchedTrackDirection } from "./directions/SwitchedTrackDirectionEnum";
-import DirectionHelper from "./helpers/DirectionHelper";
 import CurvedTrackHelper from "./helpers/CurvedTrackHelper";
+import DirectionHelper from "./helpers/DirectionHelper";
 import TrackCellBase from "./TrackCellBase";
 
 export default class SwitchTrackCell extends TrackCellBase {

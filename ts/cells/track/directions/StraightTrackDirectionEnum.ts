@@ -1,4 +1,5 @@
 export enum StraightTrackDirection {
     LeftRight,
-    UpDown
+    UpDown,
+    UpDownLeftRight
 }

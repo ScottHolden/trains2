@@ -4,12 +4,6 @@ import { StraightTrackDirection } from "../directions/StraightTrackDirectionEnum
 import { SwitchedTrackDirection } from "../directions/SwitchedTrackDirectionEnum";
 
 export default class DirectionHelper {
-    public static readonly AllBaseDirections: BaseDirection[] = [
-        BaseDirection.Up,
-        BaseDirection.Right,
-        BaseDirection.Down,
-        BaseDirection.Left
-    ];
     public static DirectionsContain(directions: BaseDirection[], target: BaseDirection): boolean {
         return directions.indexOf(target) >= 0;
     }
@@ -40,7 +34,9 @@ export default class DirectionHelper {
     };
     private static readonly StraightInnerDirections: IEnumArrayMap<BaseDirection> = {
         [StraightTrackDirection.LeftRight]: [BaseDirection.Left, BaseDirection.Right],
-        [StraightTrackDirection.UpDown]: [BaseDirection.Up, BaseDirection.Down]
+        [StraightTrackDirection.UpDown]: [BaseDirection.Up, BaseDirection.Down],
+        [StraightTrackDirection.UpDownLeftRight]:
+            [BaseDirection.Up, BaseDirection.Down, BaseDirection.Left, BaseDirection.Right]
     };
 }
 // Should move this, but it is internal only

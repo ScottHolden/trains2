@@ -9,53 +9,33 @@ export default class CurvedTrackHelper {
         this.Translate(context, direction, cellSize, true);
     }
 
+    private static readonly TranslationMap = {
+        [CurvedTrackDirection.UpRight]: [0, 0],
+        [CurvedTrackDirection.RightDown]: [0, 1],
+        [CurvedTrackDirection.DownLeft]: [1, 1],
+        [CurvedTrackDirection.LeftUp]: [1, 0]
+    }
+
+    private static readonly RotationMap = {
+        [CurvedTrackDirection.UpRight]: 0,
+        [CurvedTrackDirection.RightDown]: Math.PI / 2,
+        [CurvedTrackDirection.DownLeft]: Math.PI,
+        [CurvedTrackDirection.LeftUp]: Math.PI * 1.5
+    }
+
     private static Translate(context: CanvasRenderingContext2D, direction: CurvedTrackDirection,
                              cellSize: number, reverse: boolean = false): void {
-        const rotation = this.GetTranslateRotation(direction);
-        const translation = this.GetTranslateTranslation(direction, cellSize);
+        const rotation = this.RotationMap[direction];
+        const translation = this.TranslationMap[direction];
         if (rotation !== 0 ||
             translation[0] !== 0 ||
             translation[1] !== 0) {
             if (!reverse) {
-                context.translate(translation[0], translation[1]);
+                context.translate(translation[0] * cellSize, translation[1] * cellSize);
                 context.rotate(rotation);
             } else {
                 context.rotate(-rotation);
-                context.translate(-translation[0], -translation[1]);
-            }
-        }
-    }
-
-    private static GetTranslateRotation(direction: CurvedTrackDirection): number {
-        switch (direction) {
-            case (CurvedTrackDirection.UpRight): {
-                return 0;
-            }
-            case (CurvedTrackDirection.RightDown): {
-                return Math.PI / 2;
-            }
-            case (CurvedTrackDirection.DownLeft): {
-                return Math.PI;
-            }
-            case (CurvedTrackDirection.LeftUp): {
-                return Math.PI * 1.5;
-            }
-        }
-    }
-
-    private static GetTranslateTranslation(direction: CurvedTrackDirection, cellSize: number): number[] {
-        switch (direction) {
-            case (CurvedTrackDirection.UpRight): {
-                return [0, 0];
-            }
-            case (CurvedTrackDirection.RightDown): {
-                return [0, cellSize];
-            }
-            case (CurvedTrackDirection.DownLeft): {
-                return [cellSize, cellSize];
-            }
-            case (CurvedTrackDirection.LeftUp): {
-                return [cellSize, 0];
+                context.translate(-translation[0] * cellSize, -translation[1] * cellSize);
             }
         }
     }
