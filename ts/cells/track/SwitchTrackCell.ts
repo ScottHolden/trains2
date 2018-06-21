@@ -1,24 +1,12 @@
 import TrackSpriteCollection from "../../sprite/TrackSpriteCollection";
 import { CurvedTrackDirection } from "./directions/CurvedTrackDirectionEnum";
 import { SwitchedTrackDirection } from "./directions/SwitchedTrackDirectionEnum";
-import BonusHelper from "./helpers/BonusHelper";
+import DirectionHelper from "./helpers/DirectionHelper";
 import CurvedTrackHelper from "./helpers/CurvedTrackHelper";
-import { ITrackCell } from "./ITrackCell";
+import TrackCellBase from "./TrackCellBase";
 
-export default class SwitchTrackCell implements ITrackCell {
-    private static readonly CurveMap = {
-        [SwitchedTrackDirection.UpRightDown]: [CurvedTrackDirection.UpRight, CurvedTrackDirection.RightDown],
-        [SwitchedTrackDirection.RightDownLeft]: [CurvedTrackDirection.RightDown, CurvedTrackDirection.DownLeft],
-        [SwitchedTrackDirection.DownLeftUp]: [CurvedTrackDirection.DownLeft, CurvedTrackDirection.LeftUp],
-        [SwitchedTrackDirection.LeftUpRight]: [CurvedTrackDirection.LeftUp, CurvedTrackDirection.UpRight]
-    }
-
-    public readonly ConnectedUp: boolean;
-    public readonly ConnectedDown: boolean;
-    public readonly ConnectedLeft: boolean;
-    public readonly ConnectedRight: boolean;
+export default class SwitchTrackCell extends TrackCellBase {
     private readonly curves: CurvedTrackDirection[];
-
     private switched: boolean = false;
 
     private get primaryCurve(): CurvedTrackDirection {
@@ -30,18 +18,11 @@ export default class SwitchTrackCell implements ITrackCell {
 
     constructor(direction: SwitchedTrackDirection, private spriteCollection: TrackSpriteCollection,
                 private cellSize: number) {
-        this.curves = SwitchTrackCell.CurveMap[direction];
+        super(DirectionHelper.ExpandSwitchedTrackDirections(direction));
+        this.curves = DirectionHelper.ExpandSwitchedTrackToCurved(direction);
         if (this.curves === undefined || this.curves.length !== 2) {
             throw new Error("Mapping failed, should have just used a switch!");
         }
-        this.ConnectedUp = BonusHelper.AnyAnyEqual(this.curves,
-            CurvedTrackDirection.LeftUp, CurvedTrackDirection.UpRight);
-        this.ConnectedDown = BonusHelper.AnyAnyEqual(this.curves,
-            CurvedTrackDirection.DownLeft, CurvedTrackDirection.RightDown);
-        this.ConnectedLeft = BonusHelper.AnyAnyEqual(this.curves,
-            CurvedTrackDirection.DownLeft, CurvedTrackDirection.LeftUp);
-        this.ConnectedRight = BonusHelper.AnyAnyEqual(this.curves,
-            CurvedTrackDirection.RightDown, CurvedTrackDirection.UpRight);
     }
 
     public Draw(context: CanvasRenderingContext2D): void {

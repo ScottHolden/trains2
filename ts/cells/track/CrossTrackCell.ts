@@ -1,13 +1,10 @@
 import TrackSpriteCollection from "../../sprite/TrackSpriteCollection";
-import { ITrackCell } from "./ITrackCell";
+import DirectionHelper from "./helpers/DirectionHelper";
+import TrackCellBase from "./TrackCellBase";
 
-export default class CrossTrackCell implements ITrackCell {
-    public readonly ConnectedUp: boolean = true;
-    public readonly ConnectedDown: boolean = true;
-    public readonly ConnectedLeft: boolean = true;
-    public readonly ConnectedRight: boolean = true;
-
+export default class CrossTrackCell extends TrackCellBase {
     constructor(private spriteCollection: TrackSpriteCollection) {
+        super(DirectionHelper.AllBaseDirections);
     }
 
     public Draw(context: CanvasRenderingContext2D): void {
