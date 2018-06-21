@@ -20,24 +20,22 @@ export default class DirectionHelper {
         return this.StraightInnerDirections[direction];
     }
 
-    private static readonly SwitchedInnerDirections: IEnumArrayMap<CurvedDirection> = {
+    private static readonly SwitchedInnerDirections = {
         [SwitchedDirection.UpRightDown]: [CurvedDirection.UpRight, CurvedDirection.RightDown],
         [SwitchedDirection.RightDownLeft]: [CurvedDirection.RightDown, CurvedDirection.DownLeft],
         [SwitchedDirection.DownLeftUp]: [CurvedDirection.DownLeft, CurvedDirection.LeftUp],
         [SwitchedDirection.LeftUpRight]: [CurvedDirection.LeftUp, CurvedDirection.UpRight]
     };
-    private static readonly CurvedInnerDirections: IEnumArrayMap<BaseDirection> = {
+    private static readonly CurvedInnerDirections = {
         [CurvedDirection.UpRight]: [BaseDirection.Up, BaseDirection.Right],
         [CurvedDirection.RightDown]: [BaseDirection.Right, BaseDirection.Down],
         [CurvedDirection.DownLeft]: [BaseDirection.Down, BaseDirection.Left],
         [CurvedDirection.LeftUp]: [BaseDirection.Left, BaseDirection.Up]
     };
-    private static readonly StraightInnerDirections: IEnumArrayMap<BaseDirection> = {
+    private static readonly StraightInnerDirections = {
         [StraightDirection.LeftRight]: [BaseDirection.Left, BaseDirection.Right],
         [StraightDirection.UpDown]: [BaseDirection.Up, BaseDirection.Down],
         [StraightDirection.UpDownLeftRight]:
             [BaseDirection.Up, BaseDirection.Down, BaseDirection.Left, BaseDirection.Right]
     };
 }
-// Should move this, but it is internal only
-interface IEnumArrayMap<T> { [key: number]: T[]; }
