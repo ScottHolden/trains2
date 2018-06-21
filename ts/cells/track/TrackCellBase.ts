@@ -7,6 +7,7 @@ export default abstract class TrackCellBase implements ITrackCell {
     public readonly ConnectedDown: boolean;
     public readonly ConnectedLeft: boolean;
     public readonly ConnectedRight: boolean;
+    public abstract RequiresRedraw: boolean;
     constructor(connectedDirections: BaseDirection[]) {
         this.ConnectedUp = DirectionHelper.DirectionsContain(connectedDirections, BaseDirection.Up);
         this.ConnectedDown = DirectionHelper.DirectionsContain(connectedDirections, BaseDirection.Down);

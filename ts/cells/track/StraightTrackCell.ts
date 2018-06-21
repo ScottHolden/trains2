@@ -4,7 +4,8 @@ import DirectionHelper from "./helpers/DirectionHelper";
 import TrackCellBase from "./TrackCellBase";
 
 export default class StraightTrackCell extends TrackCellBase {
-    constructor(private direction: StraightDirection, private spriteCollection: TrackSpriteCollection,
+    public RequiresRedraw: boolean = true;
+    constructor(private readonly direction: StraightDirection, private spriteCollection: TrackSpriteCollection,
                 private cellSize: number) {
         super(DirectionHelper.ExpandStraightTrackDirections(direction));
     }
@@ -18,6 +19,7 @@ export default class StraightTrackCell extends TrackCellBase {
             this.direction === StraightDirection.UpDownLeftRight) {
             this.DrawHorizontalTrack(context);
         }
+        this.RequiresRedraw = false;
     }
     private DrawVerticalTrack(context: CanvasRenderingContext2D) {
         context.translate(this.cellSize, 0);

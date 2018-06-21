@@ -6,6 +6,7 @@ import DirectionHelper from "./helpers/DirectionHelper";
 import TrackCellBase from "./TrackCellBase";
 
 export default class SwitchTrackCell extends TrackCellBase {
+    public RequiresRedraw: boolean = true;
     private readonly curves: CurvedDirection[];
     private switched: boolean = false;
 
@@ -26,9 +27,12 @@ export default class SwitchTrackCell extends TrackCellBase {
             primaryCurve, this.cellSize);
         CurvedTrackHelper.DrawSpriteWithTranslation(context, this.spriteCollection.CurvedTrackNoPlanksSprite,
             secodaryCurve, this.cellSize);
+
+        this.RequiresRedraw = false;
     }
 
     public Switch(): void {
         this.switched = !this.switched;
+        this.RequiresRedraw = true;
     }
 }
