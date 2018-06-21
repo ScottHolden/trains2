@@ -1,21 +1,21 @@
 import TrackSpriteCollection from "../../sprite/TrackSpriteCollection";
-import { StraightTrackDirection } from "./directions/StraightTrackDirectionEnum";
+import { StraightDirection } from "./directions/StraightDirectionEnum";
 import DirectionHelper from "./helpers/DirectionHelper";
 import TrackCellBase from "./TrackCellBase";
 
 export default class StraightTrackCell extends TrackCellBase {
-    constructor(private direction: StraightTrackDirection, private spriteCollection: TrackSpriteCollection,
+    constructor(private direction: StraightDirection, private spriteCollection: TrackSpriteCollection,
                 private cellSize: number) {
         super(DirectionHelper.ExpandStraightTrackDirections(direction));
     }
 
     public Draw(context: CanvasRenderingContext2D): void {
-        if (this.direction === StraightTrackDirection.UpDown ||
-            this.direction === StraightTrackDirection.UpDownLeftRight) {
+        if (this.direction === StraightDirection.UpDown ||
+            this.direction === StraightDirection.UpDownLeftRight) {
             this.DrawVerticalTrack(context);
         }
-        if (this.direction === StraightTrackDirection.LeftRight ||
-            this.direction === StraightTrackDirection.UpDownLeftRight) {
+        if (this.direction === StraightDirection.LeftRight ||
+            this.direction === StraightDirection.UpDownLeftRight) {
             this.DrawHorizontalTrack(context);
         }
     }

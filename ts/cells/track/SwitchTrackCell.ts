@@ -1,15 +1,15 @@
 import TrackSpriteCollection from "../../sprite/TrackSpriteCollection";
-import { CurvedTrackDirection } from "./directions/CurvedTrackDirectionEnum";
-import { SwitchedTrackDirection } from "./directions/SwitchedTrackDirectionEnum";
+import { CurvedDirection } from "./directions/CurvedDirectionEnum";
+import { SwitchedDirection } from "./directions/SwitchedDirectionEnum";
 import CurvedTrackHelper from "./helpers/CurvedTrackHelper";
 import DirectionHelper from "./helpers/DirectionHelper";
 import TrackCellBase from "./TrackCellBase";
 
 export default class SwitchTrackCell extends TrackCellBase {
-    private readonly curves: CurvedTrackDirection[];
+    private readonly curves: CurvedDirection[];
     private switched: boolean = false;
 
-    constructor(direction: SwitchedTrackDirection, private spriteCollection: TrackSpriteCollection,
+    constructor(direction: SwitchedDirection, private spriteCollection: TrackSpriteCollection,
                 private cellSize: number) {
         super(DirectionHelper.ExpandSwitchedTrackDirections(direction));
         this.curves = DirectionHelper.ExpandSwitchedTrackToCurved(direction);

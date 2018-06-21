@@ -1,4 +1,4 @@
-export enum SwitchedTrackDirection {
+export enum SwitchedDirection {
     UpRightDown,
     RightDownLeft,
     DownLeftUp,

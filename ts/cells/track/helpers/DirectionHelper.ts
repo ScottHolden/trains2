@@ -1,41 +1,41 @@
 import { BaseDirection } from "../directions/BaseDirectionEnum";
-import { CurvedTrackDirection } from "../directions/CurvedTrackDirectionEnum";
-import { StraightTrackDirection } from "../directions/StraightTrackDirectionEnum";
-import { SwitchedTrackDirection } from "../directions/SwitchedTrackDirectionEnum";
+import { CurvedDirection } from "../directions/CurvedDirectionEnum";
+import { StraightDirection } from "../directions/StraightDirectionEnum";
+import { SwitchedDirection } from "../directions/SwitchedDirectionEnum";
 
 export default class DirectionHelper {
     public static DirectionsContain(directions: BaseDirection[], target: BaseDirection): boolean {
         return directions.indexOf(target) >= 0;
     }
-    public static ExpandSwitchedTrackDirections(direction: SwitchedTrackDirection): BaseDirection[] {
+    public static ExpandSwitchedTrackDirections(direction: SwitchedDirection): BaseDirection[] {
         return [].concat(...this.ExpandSwitchedTrackToCurved(direction).map(this.ExpandCurvedTrackDirections));
     }
-    public static ExpandSwitchedTrackToCurved(direction: SwitchedTrackDirection): CurvedTrackDirection[] {
+    public static ExpandSwitchedTrackToCurved(direction: SwitchedDirection): CurvedDirection[] {
         return this.SwitchedInnerDirections[direction];
     }
-    public static ExpandCurvedTrackDirections(direction: CurvedTrackDirection): BaseDirection[] {
+    public static ExpandCurvedTrackDirections(direction: CurvedDirection): BaseDirection[] {
         return this.CurvedInnerDirections[direction];
     }
-    public static ExpandStraightTrackDirections(direction: StraightTrackDirection): BaseDirection[] {
+    public static ExpandStraightTrackDirections(direction: StraightDirection): BaseDirection[] {
         return this.StraightInnerDirections[direction];
     }
 
-    private static readonly SwitchedInnerDirections: IEnumArrayMap<CurvedTrackDirection> = {
-        [SwitchedTrackDirection.UpRightDown]: [CurvedTrackDirection.UpRight, CurvedTrackDirection.RightDown],
-        [SwitchedTrackDirection.RightDownLeft]: [CurvedTrackDirection.RightDown, CurvedTrackDirection.DownLeft],
-        [SwitchedTrackDirection.DownLeftUp]: [CurvedTrackDirection.DownLeft, CurvedTrackDirection.LeftUp],
-        [SwitchedTrackDirection.LeftUpRight]: [CurvedTrackDirection.LeftUp, CurvedTrackDirection.UpRight]
+    private static readonly SwitchedInnerDirections: IEnumArrayMap<CurvedDirection> = {
+        [SwitchedDirection.UpRightDown]: [CurvedDirection.UpRight, CurvedDirection.RightDown],
+        [SwitchedDirection.RightDownLeft]: [CurvedDirection.RightDown, CurvedDirection.DownLeft],
+        [SwitchedDirection.DownLeftUp]: [CurvedDirection.DownLeft, CurvedDirection.LeftUp],
+        [SwitchedDirection.LeftUpRight]: [CurvedDirection.LeftUp, CurvedDirection.UpRight]
     };
     private static readonly CurvedInnerDirections: IEnumArrayMap<BaseDirection> = {
-        [CurvedTrackDirection.UpRight]: [BaseDirection.Up, BaseDirection.Right],
-        [CurvedTrackDirection.RightDown]: [BaseDirection.Right, BaseDirection.Down],
-        [CurvedTrackDirection.DownLeft]: [BaseDirection.Down, BaseDirection.Left],
-        [CurvedTrackDirection.LeftUp]: [BaseDirection.Left, BaseDirection.Up]
+        [CurvedDirection.UpRight]: [BaseDirection.Up, BaseDirection.Right],
+        [CurvedDirection.RightDown]: [BaseDirection.Right, BaseDirection.Down],
+        [CurvedDirection.DownLeft]: [BaseDirection.Down, BaseDirection.Left],
+        [CurvedDirection.LeftUp]: [BaseDirection.Left, BaseDirection.Up]
     };
     private static readonly StraightInnerDirections: IEnumArrayMap<BaseDirection> = {
-        [StraightTrackDirection.LeftRight]: [BaseDirection.Left, BaseDirection.Right],
-        [StraightTrackDirection.UpDown]: [BaseDirection.Up, BaseDirection.Down],
-        [StraightTrackDirection.UpDownLeftRight]:
+        [StraightDirection.LeftRight]: [BaseDirection.Left, BaseDirection.Right],
+        [StraightDirection.UpDown]: [BaseDirection.Up, BaseDirection.Down],
+        [StraightDirection.UpDownLeftRight]:
             [BaseDirection.Up, BaseDirection.Down, BaseDirection.Left, BaseDirection.Right]
     };
 }

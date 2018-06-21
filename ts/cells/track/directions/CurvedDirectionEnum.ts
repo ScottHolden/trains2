@@ -1,4 +1,4 @@
-export enum CurvedTrackDirection {
+export enum CurvedDirection {
     UpRight,
     RightDown,
     DownLeft,
