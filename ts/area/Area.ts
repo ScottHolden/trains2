@@ -1,9 +1,10 @@
 import ICell from "../cells/ICell";
 import Grid from "./Grid";
-import IArea from "./IArea";
 
-export default class Area implements IArea {
+export default class Area {
     private readonly cells: Grid<ICell>;
+    private areaContext: CanvasRenderingContext2D | null;
+
     constructor(cols: number, rows: number) {
         this.cells = new Grid<ICell>(cols, rows);
     }
@@ -11,6 +12,17 @@ export default class Area implements IArea {
         throw new Error("Method not implemented.");
     }
     public Draw(context: CanvasRenderingContext2D): void {
+        if (this.areaContext === undefined || this.areaContext === null) {
+            return;
+        }
         throw new Error("Method not implemented.");
+    }
+    public AquireContext(context: CanvasRenderingContext2D): void {
+        this.areaContext = context;
+    }
+    public ReleaseContext(): CanvasRenderingContext2D {
+        const context = this.areaContext;
+        this.areaContext = null;
+        return context;
     }
 }
