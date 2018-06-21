@@ -9,13 +9,6 @@ export default class SwitchTrackCell extends TrackCellBase {
     private readonly curves: CurvedTrackDirection[];
     private switched: boolean = false;
 
-    private get primaryCurve(): CurvedTrackDirection {
-        return this.switched ? this.curves[1] : this.curves[0];
-    }
-    private get secodaryCurve(): CurvedTrackDirection {
-        return this.switched ? this.curves[0] : this.curves[1];
-    }
-
     constructor(direction: SwitchedTrackDirection, private spriteCollection: TrackSpriteCollection,
                 private cellSize: number) {
         super(DirectionHelper.ExpandSwitchedTrackDirections(direction));
@@ -26,10 +19,13 @@ export default class SwitchTrackCell extends TrackCellBase {
     }
 
     public Draw(context: CanvasRenderingContext2D): void {
+        const primaryCurve = this.switched ? this.curves[1] : this.curves[0];
+        const secodaryCurve = this.switched ? this.curves[0] : this.curves[1];
+
         CurvedTrackHelper.DrawSpriteWithTranslation(context, this.spriteCollection.CurvedTrackSprite,
-            this.primaryCurve, this.cellSize);
+            primaryCurve, this.cellSize);
         CurvedTrackHelper.DrawSpriteWithTranslation(context, this.spriteCollection.CurvedTrackNoPlanksSprite,
-            this.secodaryCurve, this.cellSize);
+            secodaryCurve, this.cellSize);
     }
 
     public Switch(): void {

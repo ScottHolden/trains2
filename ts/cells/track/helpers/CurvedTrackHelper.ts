@@ -14,14 +14,14 @@ export default class CurvedTrackHelper {
         [CurvedTrackDirection.RightDown]: [0, 1],
         [CurvedTrackDirection.DownLeft]: [1, 1],
         [CurvedTrackDirection.LeftUp]: [1, 0]
-    }
+    };
 
     private static readonly RotationMap = {
         [CurvedTrackDirection.UpRight]: 0,
         [CurvedTrackDirection.RightDown]: Math.PI / 2,
         [CurvedTrackDirection.DownLeft]: Math.PI,
         [CurvedTrackDirection.LeftUp]: Math.PI * 1.5
-    }
+    };
 
     private static Translate(context: CanvasRenderingContext2D, direction: CurvedTrackDirection,
                              cellSize: number, reverse: boolean = false): void {
