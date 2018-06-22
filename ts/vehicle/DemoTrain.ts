@@ -24,8 +24,9 @@ export default class DemoTrain extends Vehicle {
         const carriage = this.RearAxle.Clone();
         for (let i = 0; i < this.carriageCount; i++) {
             carriage.SetPointAngle(path.MoveDistance(carriage, -carriageLinkageLength));
+            // At front axle of carriage
             carriage.SetPointAngle(path.MoveDistance(carriage, -carriageLength));
-            // At middle of carriage
+            // At rear axle of carriage
         }
     }
 }
