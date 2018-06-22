@@ -134,6 +134,13 @@ export default class Train {
                 break;
             }
         }
+        // TODO: Calculate carriage position
+        /*
+        if (this.carriage !== undefined) {
+            this.carriage.trainSpeed = this.trainSpeed;
+            this.carriage.chooChooMotherFucker(baseSpeed, false);
+        }
+        */
     }
 
     public getTrainSpeed(): number {
