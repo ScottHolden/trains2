@@ -1,8 +1,10 @@
 import { BaseDirection } from "./directions/BaseDirectionEnum";
 import DirectionHelper from "./helpers/DirectionHelper";
 import { ITrackCell } from "./ITrackCell";
+import PathPart from "./PathPart";
 
 export default abstract class TrackCellBase implements ITrackCell {
+    public readonly abstract PathPart: PathPart;
     public readonly ConnectedUp: boolean;
     public readonly ConnectedDown: boolean;
     public readonly ConnectedLeft: boolean;

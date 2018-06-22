@@ -1,13 +1,18 @@
 import TrackSpriteCollection from "../../sprite/TrackSpriteCollection";
 import { StraightDirection } from "./directions/StraightDirectionEnum";
 import DirectionHelper from "./helpers/DirectionHelper";
+import TrackPathHelper from "./helpers/TrackPathHelper";
 import TrackCellBase from "./TrackCellBase";
 
 export default class StraightTrackCell extends TrackCellBase {
+    public readonly PathPart: any;
     public RequiresRedraw: boolean = true;
+
     constructor(private readonly direction: StraightDirection, private spriteCollection: TrackSpriteCollection,
                 private cellSize: number) {
         super(DirectionHelper.ExpandStraightTrackDirections(direction));
+
+        this.PathPart = TrackPathHelper.GetStraightPathPart(direction, cellSize);
     }
 
     public Draw(context: CanvasRenderingContext2D): void {

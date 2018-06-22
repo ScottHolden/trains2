@@ -1,5 +1,5 @@
-import IPointAngle from "../point/ipointangle";
-import IVelocityPoint from "../point/ivelocitypoint";
+import IPointAngle from "../point/IPointAngle";
+import IVelocityPoint from "../point/IVelocityPoint";
 
 export default class Path {
     public Move(start: IVelocityPoint, steps: number): IPointAngle {

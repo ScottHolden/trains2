@@ -1,5 +1,5 @@
-import Path from "./path/Path";
-import Vehicle from "./Vehicle";
+import Path from "./path/path";
+import Vehicle from "./vehicle";
 
 export default class DemoTrain extends Vehicle {
     private carriageCount: number;
