@@ -1,6 +1,7 @@
 export default interface IPoint {
-    X: number;
-    Y: number;
+    readonly X: number;
+    readonly Y: number;
     SetPoint(point: IPoint);
     Clone(): IPoint;
+    Equals(point: IPoint);
 }
